@@ -2,3 +2,4 @@ Flask
 gunicorn
 Jinja2
 firebase_admin
+psycopg2
