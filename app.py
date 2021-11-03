@@ -319,7 +319,7 @@ def addEmergencyUser():
     return jsonify({"status":"success"})
 
 
-@app.route('/getPrescription',methods=['GET'])
+@app.route('/getPrescription',methods=['POST'])
 def getPrescription():
     data=request.get_json()
     email=data['email']
