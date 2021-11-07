@@ -106,31 +106,31 @@
                                 <br>
                                 <h3><b>Add Patient's Personal Info</b></h3>
                                 <br>
-                                <form class="addform row g-3">
+                                <form class="addform row g-3" method="post" action="/api/addPersonal">
                                   <div class="col-md-6">
                                     <label for="id" class="form-label">Patient ID</label>
-                                    <input type="text" class="form-control" id="id" placeholder="Enter Patient ID">
+                                    <input type="number" class="form-control" id="id" name="id" placeholder="Enter Patient ID">
                                   </div>
                                   <div class="col-md-6">
                                     <label for="name" class="form-label">Patient Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Patient Name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Patient Name">
                                   </div>
 
                                   <div class="col-md-6">
                                       <label for="img" class="form-label">Profile Image</label>
-                                      <input type="text" id="img" class="form-control" placeholder="Image url">
+                                      <input type="text" id="img" class="form-control" name="image" placeholder="Image url">
                                      
                                     </div>
                                     
 
                                     <div class="col-md-6">
                                       <label for="DateOfBirth" class="form-label">DOB</label>
-                                      <input type="text" class="form-control" id="DateOfBirth" placeholder="DD/MM/YYYY">
+                                      <input type="text" class="form-control" id="DateOfBirth" name="dob" placeholder="DD/MM/YYYY">
                                     </div>
 
                                     <div class="col-md-6">
                                       <label for="age" class="form-label">Age</label>
-                                      <input type="text" class="form-control" id="age" placeholder="Enter Patient Age">
+                                      <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age">
                                     </div>
                                     
                                     
@@ -139,10 +139,10 @@
                                      
                                       <div class="form-check">
                                         <label class="form-check-label" style="margin-right: 10px;">Gender: 
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios1" value="option1" style="margin-top: 20px; ">
+                                          <input class="form-check-input radio-inline" type="radio" name="gender" id="gridRadios1" value="male" style="margin-top: 20px; ">
                                          Male</label>
                                           <label class="form-check-label">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                          <input class="form-check-input radio-inline" type="radio" name="gender" id="gridRadios2" value="female" style="margin-top: 20px;">
                                           Female</label>
                                          
                                       </div>
@@ -151,21 +151,21 @@
 
                                     <div class="col-md-6">
                                       <label for="phone" class="form-label">Phone Number</label>
-                                      <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number">
+                                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
                                     </div>
                                     <div class="col-md-6">
                                       <label for="inputEmail4" class="form-label">E-mail</label>
-                                      <input type="email" class="form-control" id="inputEmail4" placeholder="Enter your e-mail id">
+                                      <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Enter your e-mail id">
                                     </div>
 
                                     <div class="col-md-6">
                                       <label for="GuardianName" class="form-label">Guardian Name</label>
-                                      <input type="text" class="form-control" id="GuardianName" placeholder="Enter Guardian Name">
+                                      <input type="text" class="form-control" id="GuardianName" name="guardian" placeholder="Enter Guardian Name">
                                     </div>
                                     
                                     <div class="col-md-6">
                                       <label for="address" class="form-label">Address</label>
-                                      <input type="text" class="form-control" id="address" placeholder="Enter Patient Address">
+                                      <input type="text" class="form-control" id="address" name="address" placeholder="Enter Patient Address">
                                     </div>
 
                                   <div class="col-12">
@@ -181,26 +181,26 @@
                               <br>
                               <h3><b>Add Patient's Covid History</b></h3>
                               <br>
-                              <form class="addform row g-3">
+                              <form class="addform row g-3" method="POST" action="/api/addHistory">
                                 <div class="col-md-6">
                                   <label for="id" class="form-label">Patient ID</label>
-                                  <input type="text" class="form-control" id="id" placeholder="Enter Patient ID">
+                                  <input type="number" class="form-control" id="id" name="id" placeholder="Enter Patient ID">
                                 </div>
                                 <div class="col-md-6">
                                   <label for="name" class="form-label">Patient Name</label>
-                                  <input type="text" class="form-control" id="name" placeholder="Enter Patient Name">
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Patient Name">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="blood" class="form-label">Blood Type</label>
-                                    <input type="text" class="form-control" id="blood" placeholder="Enter Blood Type">
+                                    <input type="text" class="form-control" id="blood" name="blood" placeholder="Enter Blood Type">
                                   </div>
                                   <div class="col-md-6">
                                     <label for="height" class="form-label">Height</label>
-                                    <input type="text" class="form-control" id="Height"  placeholder="Enter Patient Height">
+                                    <input type="number" class="form-control" id="Height" name="height"  placeholder="Enter Patient Height">
                                   </div>
                                   <div class="col-md-6">
                                     <label for="weight" class="form-label">Weight</label>
-                                    <input type="text" class="form-control" id="weight" placeholder="Enter Patient Weight">
+                                    <input type="number" class="form-control" id="weight" name="weight" placeholder="Enter Patient Weight">
                                   </div>
                                  
 
@@ -208,10 +208,10 @@
                                       
                                       <div class="form-check">
                                         <label class="form-check-label" style="margin-right: 10px;">Vaccinated?
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios1" value="option1" style="margin-top: 20px; ">
+                                          <input class="form-check-input radio-inline" type="radio" name="vaccine" id="gridRadios1" value="yes" style="margin-top: 20px; ">
                                            Yes</label>
                                           <label class="form-check-label">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                          <input class="form-check-input radio-inline" type="radio" name="vaccine" id="gridRadios2" value="no" style="margin-top: 20px;">
                                           No</label>
                                         
                                       
@@ -224,7 +224,7 @@
                                    
                                     <div class="col-md-6">
                                       <label for="weight" class="form-label">Body Temperature Recorded</label>
-                                      <input type="text" class="form-control" id="weight" placeholder="Enter Patient Temperature">
+                                      <input type="number" class="form-control" id="weight" name="temp" placeholder="Enter Patient Temperature">
                                     </div>
 
                            
@@ -232,26 +232,26 @@
                                   <div class="col-md-6">
                                     <label for="hospital" class="form-label">Covid Status:</label><br>
                                         <label class="form-check-label" style="margin-right: 10px;">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios1" value="option1" style="margin-top: 20px; ">
+                                          <input class="form-check-input radio-inline" type="radio" name="cstatus" id="gridRadios1" value="Detected" style="margin-top: 20px; ">
                                            Detected</label>
                                           <label class="form-check-label">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                          <input class="form-check-input radio-inline" type="radio" name="cstatus" id="gridRadios2" value="Results Pending" style="margin-top: 20px;">
                                            Results Pending</label>
                                            <label class="form-check-label">
-                                            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                            <input class="form-check-input radio-inline" type="radio" name="cstatus" id="gridRadios2" value="Not Detected" style="margin-top: 20px;">
                                             Not Detected</label>
                                            <label class="form-check-label">
-                                            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                            <input class="form-check-input radio-inline" type="radio" name="cstatus" id="gridRadios2" value="Recovered" style="margin-top: 20px;">
                                             Recovered</label>
                                             
                                   </div>
                                   <div class="col-md-6">
                                     <label for="hospital" class="form-label">Declared suspected case is admitted to</label><br>
                                         <label class="form-check-label" style="margin-right: 10px;">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios1" value="option1" style="margin-top: 20px; ">
+                                          <input class="form-check-input radio-inline" type="radio" name="location" id="gridRadios1" value="home" style="margin-top: 20px; ">
                                            Home Quarantined</label>
                                           <label class="form-check-label">
-                                          <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
+                                          <input class="form-check-input radio-inline" type="radio" name="location" id="gridRadios2" value="hospital" style="margin-top: 20px;">
                                           In-patient</label>
                                   </div>
                                   
@@ -276,22 +276,22 @@
                             
                                   <h3><b>Add Patient's Home Location</b></h3>
                                  <br>
-                                  <form class="addform row g-3">
+                                  <form class="addform row g-3" method="POST" action="/api/addHome">
                                     <div class="col-md-6">
                                       <label for="id" class="form-label">Patient ID</label>
-                                      <input type="text" class="form-control" id="id" placeholder="Enter Patient ID">
+                                      <input type="number" class="form-control" id="id" name="id"placeholder="Enter Patient ID">
                                     </div>
                                     <div class="col-md-6">
                                       <label for="locname" class="form-label">Location Name</label>
-                                      <input type="text" class="form-control" id="locname" placeholder="Enter Patient Location">
+                                      <input type="text" class="form-control" id="locname" name="name" placeholder="Enter Patient Location">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lat" class="form-label">Latitude</label>
-                                        <input type="text" class="form-control" id="lat" placeholder="Enter Latitude">
+                                        <input type="text" class="form-control" id="lat" name="latitude" placeholder="Enter Latitude">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="long" class="form-label">Longitude</label>
-                                        <input type="text" class="form-control" id="long"  placeholder="Enter Longitude">
+                                        <input type="text" class="form-control" id="long" name="longitude"  placeholder="Enter Longitude">
                                       </div>
                                     <div class="col-12">
                                       <button style="width: 100%; margin-top: 20px; height: 40px;" type="submit" class="btn btn-primary"><b>Submit</b></button>
@@ -307,22 +307,22 @@
                                   <h3><b>In-Patient Room Details</b></h3>
                                   <br>
                                  
-                                  <form class="addform row g-3">
+                                  <form class="addform row g-3" method="post" action="/api/addHospital">
                                     <div class="col-md-6">
                                       <label for="id" class="form-label">Patient ID</label>
-                                      <input type="text" class="form-control" id="id" placeholder="Enter Patient ID">
+                                      <input type="number" class="form-control" name="id" id="id" placeholder="Enter Patient ID">
                                     </div>
                                     <div class="col-md-6">
                                       <label for="locname" class="form-label">Ward Name</label>
-                                      <input type="text" class="form-control" id="locname" placeholder="Enter Ward Name">
+                                      <input type="text" class="form-control" name="ward" id="locname" placeholder="Enter Ward Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lat" class="form-label">Room No.</label>
-                                        <input type="text" class="form-control" id="lat" placeholder="Enter Room Number">
+                                        <input type="number" class="form-control" name="room" id="lat" placeholder="Enter Room Number">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="long" class="form-label">Bed No.</label>
-                                        <input type="text" class="form-control" id="long"  placeholder="Enter Bed Number">
+                                        <input type="number" class="form-control" name="bed" id="long"  placeholder="Enter Bed Number">
                                       </div>
                                     <div class="col-12">
                                       <button style="width: 100%; margin-top: 20px; height: 40px;" type="submit" class="btn btn-primary"><b>Submit</b></button>
@@ -358,58 +358,35 @@
                               <br>
                               <h3><b>Add Patient's Prescription Details</b></h3>
                               <br>
-                              <form class="addform row g-3">
+                              <form class="addform row g-3" method="POST" action="/api/addPrescription">
                                 <div class="col-md-6">
                                   <label for="id" class="form-label">Patient ID</label>
-                                  <input type="text" class="form-control" id="id" placeholder="Enter Patient ID">
+                                  <input type="number" class="form-control" name="pid" id="id" placeholder="Enter Patient ID">
                                 </div>
                                 <div class="col-md-6">
                                   <label for="presid" class="form-label">Prescription ID</label>
-                                  <input type="text" class="form-control" id="presid" placeholder="Enter Prescription ID">
+                                  <input type="number" class="form-control" name="id" id="presid" placeholder="Enter Prescription ID">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="presname" class="form-label">Prescription Name</label>
-                                    <input type="text" class="form-control" id="presname" placeholder="Enter Prescription Name">
+                                    <input type="text" class="form-control" name="name" id="presname" placeholder="Enter Prescription Name">
                                   </div>
                                   <div class="col-md-6">
                                     <label for="Time" class="form-label">Dose Timings</label>
-                                    <input type="text" class="form-control" id="Time"  placeholder="Enter Dose Timing">
+                                    <input type="text" class="form-control" name="timings" id="Time"  placeholder="Enter Dose Timing">
                                   </div>
                                   <div class="col-md-6">
                                     <label for="quantity" class="form-label">Quantity</label>
-                                    <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity">
+                                    <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity">
                                   </div>
                                   
                                   <div class="col-md-6">
                                     <label for="date" class="form-label">Date Prescribed</label>
-                                    <input type="text" class="form-control" id="date" placeholder="DD/MM/YYYY">
+                                    <input type="text" class="form-control" name="date" id="date" placeholder="DD/MM/YYYY">
                                   </div>
 
-                                  <div class="col-md-6">
-                                    
-                                    <label class="form-check-label">Schedule:
-                                    <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                        Mon</label>
-                                    <label class="form-check-label">
-                                      <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                      Tue</label>
-                                      <label class="form-check-label">
-                                        <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                        Wed</label>
-                                        <label class="form-check-label">
-                                          <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                          Thurs</label>
-                                          <label class="form-check-label">
-                                            <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                            Fri</label>
-                                            <label class="form-check-label">
-                                              <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                              Sat</label>
-                                              <label class="form-check-label">
-                                                <input class="form-check-input radio-inline" type="checkbox" name="gridRadios" id="gridRadios2" value="option2" style="margin-top: 20px;">
-                                                Sat</label>
-
-                                  </div>
+                                  
+                         
                                   
                                 <div class="col-12">
                                   <button style="width: 100%; margin-top: 20px; height: 40px;" type="submit" class="btn btn-primary"><b>Submit</b></button>
