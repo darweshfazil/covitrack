@@ -1,0 +1,245 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>
+   CoviTrack
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <script src="/static/index.js"></script>
+  <link href="/static/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
+    
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                  <ul class="nav">
+                    <ul>
+                            <li>
+                               <a href="/index" class="active">
+                               <span class="icon"><i class="fas fa-user"></i></span>
+                               <span class="title">Patient Dashboard</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/medicalhistory">
+                               <span class="icon"><i class="fas fa-list-alt"></i></span>
+                               <span class="title">Covid-19 History</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/emergency">
+                               <span class="icon"><i class="fas fa-phone"></i></span>
+                               <span class="title">Emergency Requests</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/location">
+                               <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                               <span class="title">Patient Location</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/prescription">
+                               <span class="icon"><i class="fas fa-pills"></i></span>
+                               <span class="title">Prescriptions History</span>
+                               </a>
+                            </li>
+                         </ul>
+                            </ul>
+                        
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+    
+            <div class="col-xs-12 col-sm-9">
+                <br>
+                <div class="jumbotron" style="background-color: white;">
+                  <a href="index.html"><img src="\static\back.png"></a>
+                    <h3><b>Emergency Requests Summary</b></h3>
+                    <br>
+                    <div class="row">
+                      <div class="det col-sm-3"><b>Total Requests</b>
+                        <div><h2><b>5</b></h2></div>
+                      </div>
+                      <div class="home col-sm-3"><b>New Requests</b>
+                        <div><h2><b>1</b></h2></div>
+                      </div>
+                      <div class="inpt col-sm-3"><b>In-Progress</b>
+                        <div><h2><b>2</b></h2></div>
+                      </div>
+                      <div class="rec col-sm-3"><b>Closed</b>
+                        <div><h2><b>1</b></h2></div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                              <div id="table" class="table-editable">
+                                <table class="table table-bordered table-responsive-md table-striped text-center">
+                                  <thead>
+                                    <tr>
+                                      <th class="text-center">Patient Name</th>
+                                      <th class="text-center">Age</th>
+                                      <th class="text-center">Area</th>
+                                      <th class="text-center">Date</th>
+                                      <th class="text-center">Time</th>
+                                      <th class="text-center">Sort</th>
+                                      <th class="text-center">Remove</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td class="pt-3-half" contenteditable="true">Aurelia</td>
+                                      <td class="pt-3-half" contenteditable="true">30</td>
+                                      <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
+                                      <td class="pt-3-half" contenteditable="true">03/08</td>
+                                      <td class="pt-3-half" contenteditable="true">3:45</td>
+                                      
+                                      <td class="pt-3-half">
+                                        <span class="table-up"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
+                                        ></span>
+                                        <span class="table-down"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
+                                        ></span>
+                                      </td>
+                                      <td>
+                                        <span class="table-remove"
+                                          ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+                                            Remove
+                                          </button></span
+                                        >
+                                      </td>
+                                    </tr>
+                                    <!-- This is our clonable table line -->
+                                    <tr>
+                                      <td class="pt-3-half" contenteditable="true">Aurelia</td>
+                                      <td class="pt-3-half" contenteditable="true">30</td>
+                                      <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
+                                      <td class="pt-3-half" contenteditable="true">03/08</td>
+                                      <td class="pt-3-half" contenteditable="true">3:45</td>
+                                      <td class="pt-3-half">
+                                        <span class="table-up"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
+                                        ></span>
+                                        <span class="table-down"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
+                                        ></span>
+                                      </td>
+                                      <td>
+                                        <span class="table-remove"
+                                          ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+                                            Remove
+                                          </button></span
+                                        >
+                                      </td>
+                                    </tr>
+                                    <!-- This is our clonable table line -->
+                                    <tr>
+                                      <td class="pt-3-half" contenteditable="true">Aurelia</td>
+                                      <td class="pt-3-half" contenteditable="true">30</td>
+                                      <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
+                                      <td class="pt-3-half" contenteditable="true">03/08</td>
+                                      <td class="pt-3-half" contenteditable="true">3:45</td>
+                                      <td class="pt-3-half">
+                                        <span class="table-up"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
+                                        ></span>
+                                        <span class="table-down"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
+                                        ></span>
+                                      </td>
+                                      <td>
+                                        <span class="table-remove"
+                                          ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+                                            Remove
+                                          </button></span
+                                        >
+                                      </td>
+                                    </tr>
+                                    <!-- This is our clonable table line -->
+                                    <tr class="hide">
+                                      <td class="pt-3-half" contenteditable="true">Aurelia</td>
+                                      <td class="pt-3-half" contenteditable="true">30</td>
+                                      <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
+                                      <td class="pt-3-half" contenteditable="true">3:45</td>
+                                      <td class="pt-3-half">
+                                        <span class="table-up"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
+                                        ></span>
+                                        <span class="table-down"
+                                          ><a href="#!" class="indigo-text"
+                                            ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
+                                        ></span>
+                                      </td>
+                                      <td>
+                                        <span class="table-remove"
+                                          ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+                                            Remove
+                                          </button></span
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    </div>
+
+                </div>
+
+                
+            </div>
+            <!--/span-->
+    
+    
+        </div>
+        <!--/row-->
+    
+        
+    
+    </div>
+    <!--/.container-->
+</body>

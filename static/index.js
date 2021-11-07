@@ -1,128 +1,68 @@
-const html = document.documentElement;
-const body = document.body;
-const menuLinks = document.querySelectorAll(".admin-menu a");
-const collapseBtn = document.querySelector(".admin-menu .collapse-btn");
-const toggleMobileMenu = document.querySelector(".toggle-mob-menu");
-const switchInput = document.querySelector(".switch input");
-const switchLabel = document.querySelector(".switch label");
-const switchLabelText = switchLabel.querySelector("span:last-child");
-const collapsedClass = "collapsed";
-const lightModeClass = "light-mode";
-
-/*TOGGLE HEADER STATE*/
-collapseBtn.addEventListener("click", function () {
-  body.classList.toggle(collapsedClass);
-  this.getAttribute("aria-expanded") == "true"
-    ? this.setAttribute("aria-expanded", "false")
-    : this.setAttribute("aria-expanded", "true");
-  this.getAttribute("aria-label") == "collapse menu"
-    ? this.setAttribute("aria-label", "expand menu")
-    : this.setAttribute("aria-label", "collapse menu");
-});
-
-/*TOGGLE MOBILE MENU*/
-toggleMobileMenu.addEventListener("click", function () {
-  body.classList.toggle("mob-menu-opened");
-  this.getAttribute("aria-expanded") == "true"
-    ? this.setAttribute("aria-expanded", "false")
-    : this.setAttribute("aria-expanded", "true");
-  this.getAttribute("aria-label") == "open menu"
-    ? this.setAttribute("aria-label", "close menu")
-    : this.setAttribute("aria-label", "open menu");
-});
-
-/*SHOW TOOLTIP ON MENU LINK HOVER*/
-for (const link of menuLinks) {
-  link.addEventListener("mouseenter", function () {
-    if (
-      body.classList.contains(collapsedClass) &&
-      window.matchMedia("(min-width: 768px)").matches
-    ) {
-      const tooltip = this.querySelector("span").textContent;
-      this.setAttribute("title", tooltip);
-    } else {
-      this.removeAttribute("title");
-    }
+$(document).ready(function() {
+    $('[data-toggle=offcanvas]').click(function() {
+      $('.row-offcanvas').toggleClass('active');
+    });
   });
-}
 
-/*TOGGLE LIGHT/DARK MODE*/
-if (localStorage.getItem("dark-mode") === "false") {
-  html.classList.add(lightModeClass);
-  switchInput.checked = false;
-  switchLabelText.textContent = "Light";
-}
 
-switchInput.addEventListener("input", function () {
-  html.classList.toggle(lightModeClass);
-  if (html.classList.contains(lightModeClass)) {
-    switchLabelText.textContent = "Light";
-    localStorage.setItem("dark-mode", "false");
-  } else {
-    switchLabelText.textContent = "Dark";
-    localStorage.setItem("dark-mode", "true");
-  }
-});
-
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
     }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
   }
-}
 
-function openForm() {
-  document.getElementById("myModal").style.display = "block";
-}
+  
 
-function closeForm() {
-  document.getElementById("deleteform").style.display = "none";
-}
+  const $tableID = $('#table'); const $BTN = $('#export-btn'); const $EXPORT = $('#export');
+const newTr = `
+<tr class="hide">
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half">
+    <span class="table-up"
+      ><a href="#!" class="indigo-text"
+        ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
+    ></span>
+    <span class="table-down"
+      ><a href="#!" class="indigo-text"
+        ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
+    ></span>
+  </td>
+  <td>
+    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
+        Remove
+      </button></span>
+  </td>
+</tr>
+`;
+ $('.table-add').on('click', 'i', () => { const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line'); 
+if ($tableID.find('tbody tr').length=== 0) { 
+  $('tbody').append(newTr); } $tableID.find('table').append($clone); });
+  
+$tableID.on('click', '.table-remove', function () { $(this).parents('tr').detach(); });
+
+$tableID.on('click', '.table-up', function () { const $row = $(this).parents('tr'); if
+($row.index() === 0) { return; } $row.prev().before($row.get(0)); }); $tableID.on('click',
+'.table-down', function () { const $row = $(this).parents('tr');
+$row.next().after($row.get(0)); }); // A few jQuery helpers for exporting only jQuery.
+fn.pop= [].pop; jQuery.fn.shift = [].shift; $BTN.on('click', () => { const $rows =
+$tableID.find('tr:not(:hidden)'); const headers = []; const data = []; // Get the headers(add special header logic here) 
+
+$($rows.shift()).find('th:not(:empty)').each(function () {
+headers.push($(this).text().toLowerCase()); }); // Turn all existing rows into a loopable array 
+$rows.each(function () { const $td = $(this).find('td'); const h = {}; // Use the headers from earlier to name our hash keys
+ headers.forEach((header, i) => { h[header] =
+$td.eq(i).text(); }); data.push(h); }); // Output the result
+$EXPORT.text(JSON.stringify(data)); });
+

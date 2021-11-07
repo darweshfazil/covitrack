@@ -1,0 +1,184 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>
+   Patient Information
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <script src="/static/index.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href="/static/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
+    
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                    <ul class="nav">
+                         <ul>
+                            <li>
+                               <a href="/index" class="active">
+                               <span class="icon"><i class="fas fa-user"></i></span>
+                               <span class="title">Patient Dashboard</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/medicalhistory">
+                               <span class="icon"><i class="fas fa-list-alt"></i></span>
+                               <span class="title">Covid-19 History</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/emergency">
+                               <span class="icon"><i class="fas fa-phone"></i></span>
+                               <span class="title">Emergency Requests</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/location">
+                               <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                               <span class="title">Patient Location</span>
+                               </a>
+                            </li>
+                            <li>
+                               <a href="/prescription">
+                               <span class="icon"><i class="fas fa-pills"></i></span>
+                               <span class="title">Prescriptions History</span>
+                               </a>
+                            </li>
+                         </ul>
+                                </ul>
+                            
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+    
+            <div class="col-xs-12 col-sm-9">
+                <br>
+                <div class="jumbotron" style="background-color: white;">
+                   <a href="index.html"><img src="\static\back.png"></a>
+                   <br>
+                    <h3><b>Patient Information</b></h3>
+                    <br>
+                    <div class="row ">
+                        <div class="col-6 col-sm-6 col-lg-4" >
+                           
+                            <img src="https://ibighit.com/bts/images/bts/profile/member-jin.jpg" class="img-fluid" alt="pt" width="250px" height="250px">
+                        </div>
+                  
+                        <div class="col-6 col-sm-6 col-lg-4" >
+                          
+                         <ul class="pt_info">
+                             <li>Patient ID         :</li>
+                             <li>Patient Name       :</li>
+                             <li>Patient Age        :</li>
+                             <li>Patient Gender     :</li>
+                             <li>Covid Status            :</li>
+                             <li>Location         :</li>
+                         </ul>
+                        </div>
+                   
+                    </div>
+
+                    <div class="row">
+                        <br>
+                        <br>
+                        <div class="col">
+                            <div class="tab">
+                                <button class="tablinks" onclick="openCity(event, 'London')">Emergency Requests</button>
+                                <button class="tablinks" onclick="openCity(event, 'Paris')"> Patient Progress</button>
+                                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Patient Location</button>
+                                <button class="tablinks" onclick="openCity(event, 'China')">Prescription</button>
+                              </div>
+                              
+                              <div id="London" class="tabcontent">
+                                <div class="row">
+                                    <div class="col" style="margin: 30px; padding: 10px;">
+                                   <h5 style="line-height: 40px"><b>Emergency Requests ID:<br>
+                                    Area:<br>
+                                    Date:<br>
+                                    Time:</b></h5>     
+                                    </div>
+                                </div>
+                              </div>
+                              
+                              <div id="Paris" class="tabcontent">
+                                <div class="row">
+                                    <div class="col" style="margin: 30px; padding: 10px;">
+                                   <h5 style="line-height: 40px">
+                                    <b>Patients Progress <br>Day 1 :
+                                    </b>
+                                    </h5>
+                                    
+                                </div>
+                              </div>
+                              </div>
+                              <div id="Tokyo" class="tabcontent">
+                                <div class="row">
+                                    <div class="col" style="margin: 30px; padding: 10px;">
+                                   <h5 style="line-height: 40px">
+                                    <b>Home Location: Address</b>
+                                    </h5>
+                                    
+                                </div>
+                              </div>
+                              </div>
+                              <div id="China" class="tabcontent">
+                                <div class="row">
+                                    <div class="col" style="margin: 30px; padding: 10px;">
+                                   <h5 style="line-height: 40px">
+                                    <b>Prescription ID:<br>
+                                    Prescription Name:<br>
+                                    Date Prescribed:<br>
+                                    Quantity:<br>
+                                    Schedule:</b>
+                                    </h5>
+                                    
+                                </div>
+                              </div>
+                              </div>
+                             
+                                 
+
+
+                        </div>
+                    </div>
+        <!--/row-->
+    
+
+    
+        
+    
+    </div>
+    <!--/.container-->
+</body>
