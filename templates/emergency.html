@@ -121,12 +121,13 @@
                                     </tr>
                                   </thead>
                                   <tbody>
+                                  {%for em in data%}
                                     <tr>
-                                      <td class="pt-3-half" contenteditable="true">Aurelia</td>
-                                      <td class="pt-3-half" contenteditable="true">30</td>
-                                      <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
-                                      <td class="pt-3-half" contenteditable="true">03/08</td>
-                                      <td class="pt-3-half" contenteditable="true">3:45</td>
+                                      <td class="pt-3-half" contenteditable="true">{{em[1]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{em[2]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{em[3]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{em[4]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{em[5]}}</td>
                                       
                                       <td class="pt-3-half">
                                         <span class="table-up"
@@ -146,8 +147,9 @@
                                         >
                                       </td>
                                     </tr>
+                                    {%endfor%}
                                     <!-- This is our clonable table line -->
-                                    <tr>
+                                    <!-- <tr>
                                       <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                       <td class="pt-3-half" contenteditable="true">30</td>
                                       <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
@@ -170,9 +172,9 @@
                                           </button></span
                                         >
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                     <!-- This is our clonable table line -->
-                                    <tr>
+                                    <!-- <tr>
                                       <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                       <td class="pt-3-half" contenteditable="true">30</td>
                                       <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
@@ -195,9 +197,9 @@
                                           </button></span
                                         >
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                     <!-- This is our clonable table line -->
-                                    <tr class="hide">
+                                    <!-- <tr class="hide">
                                       <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                       <td class="pt-3-half" contenteditable="true">30</td>
                                       <td class="pt-3-half" contenteditable="true">xxxyyyzzz</td>
@@ -219,7 +221,7 @@
                                           </button></span
                                         >
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                   </tbody>
                                 </table>
                               </div>

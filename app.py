@@ -1,254 +1,6 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
-from flask import Flask, render_template , request,jsonify
+from flask import Flask, render_template , request,jsonify,redirect,url_for
 import psycopg2
-cred = credentials.Certificate("service_accountkey.json")
-firebase_admin.initialize_app(cred)
-
-db = firestore.client()
 app = Flask(__name__)
-
-
-
-def addpatientdata(data, id1):
-    db.collection('patient').document(id1).set(data)
-
-def readpatient(table):
-    list=[]
-    temp=[]
-    keys=['id', 'name','age', 'gender','address', 'phone','email', 'blood', 'weight', 'height','stage','history']
-    result = db.collection(table).get()
-    for res in result:
-        dict=res.to_dict()
-        for i in keys:
-            temp.append(dict[i])
-        list.append(temp)
-        temp=[]
-    list = sorted(list, key=lambda x: x[0])
-    return list
-
-def deletedata(collection, document):
-    db.collection(collection).document(document).delete()
-
-def addlocationdata(data, id1):
-    db.collection('patient').document(id1).collection('details').document("Location").set(data)
-
-def addprescriptiondata(data, id1):
-    db.collection('patient').document(id1).collection('details').document("Prescription").set(data)
-
-def addcontactdata(data, id1):
-    db.collection('patient').document(id1).collection('details').document("Contacts").set(data)
-
-def deletecontactdata(id1):
-    db.collection('patient').document(id1).collection('details').document('Contacts').delete()
-
-@app.route("/", methods=['GET', 'POST'])
-def hello():
-    result = readpatient("patient")
-    return render_template("index.html", data=result)
-
-@app.route("/home", methods=['GET', 'POST'])
-def homepage():
-    result = readpatient("patient")
-    return render_template("index.html", data=result)
-
-@app.route("/index", methods=['GET', 'POST'])
-def index():
-    return render_template("addpatient.html")
-
-@app.route("/locations", methods=['GET', 'POST'])
-def locations():
-    return render_template("locations.html")
-
-@app.route("/contact", methods=['GET', 'POST'])
-def contact():
-    return render_template("contact.html")
-
-@app.route("/homemap", methods=['GET', 'POST'])
-def homemap():
-    return render_template("homemapdata.html")
-
-@app.route("/prescription", methods=['GET', 'POST'])
-def prescription():
-    return render_template("prescription.html")
-
-@app.route("/editpatient", methods=['GET', 'POST'])
-def editpatient():
-    return render_template("editpatient.html")
-
-@app.route("/addlocation", methods=['GET', 'POST'])
-def add():
-    return render_template("addlocation.html")
-
-@app.route("/addcontact", methods=['GET', 'POST'])
-def addcontactpage():
-    return render_template("addcontact.html")
-
-@app.route("/editcontact", methods=['GET', 'POST'])
-def editcontact():
-    return render_template("editcontact.html")
-
-@app.route("/addprescription", methods=['GET', 'POST'])
-def addprescriptionpage():
-    return render_template("addprescription.html")
-
-@app.route("/editprescription", methods=['GET', 'POST'])
-def editprescription():
-    return render_template("editprescription.html")
-
-@app.route("/add-patient", methods=['GET', 'POST'])
-def addpatient():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        email = request.form["email"]
-        blood = request.form["blood"]
-        weight = request.form["weight"]
-        age = request.form["age"]
-        height = request.form["height"]
-        stage = request.form["stage"]
-        address = request.form["address"]
-        phone = request.form["phone"]
-        history = request.form["history"]
-        gender = request.form["gender"]
-
-        data ={'id':id1, 'name':name,'email':email, 'blood':blood, 'weight':weight,'age':age, 'height':height,'stage':stage,'address':address,'phone':phone, 'history':history,'gender':gender}
-        addpatientdata(data, id1)
-
-        result = readpatient("patient")
-    
-    return render_template("index.html", data=result)
-
-@app.route("/delete-patient", methods=['GET', 'POST'])
-def deletepatient():
-    if request.method=="POST":
-        collection="patient"
-        id1 = request.form["id1"]
-        deletedata(collection, id1)
-    return render_template("editpatient.html")
-
-@app.route("/add-location", methods=['GET', 'POST'])
-def addlocation():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        location = request.form["location"]
-        latitude = request.form["latitude"]
-        longitude = request.form["longitude"]
-
-        data={'location':location, 'latitude':latitude, 'longitude':longitude}
-        addlocationdata(data, id1)
-
-    return render_template("addlocation.html")
-
-@app.route("/add-contact", methods=['GET', 'POST'])
-def addcontact():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        relation = request.form["relation"]
-        phone = request.form["phone"]
-
-        data={'name':name, 'relation':relation, 'phone':phone}
-        addcontactdata(data, id1)
-
-        list=[]
-        list.append(id1)
-        keys=['name','phone','relation']
-        result = db.collection("patient").document(id1).collection("details").document('Contacts').get()
-        dict = result.to_dict()
-        for i in keys:
-            list.append(dict[i])
-
-    return render_template("contact.html", data=list)
-
-@app.route("/delete-contact", methods=['GET', 'POST'])
-def deletecontact():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        deletecontactdata(id1)
-    return render_template("editcontact.html")
-
-@app.route("/update-contact", methods=['GET', 'POST'])
-def updatecontact():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        relation = request.form["relation"]
-        phone = request.form["phone"]
-
-        data={'name':name, 'relation':relation, 'phone':phone}
-        addcontactdata(data, id1)
-
-    return render_template("editcontact.html")
-
-@app.route("/add-prescription", methods=['GET', 'POST'])
-def addprescription():
-    if request.method=="POST":
-        pid = request.form["pid"]
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        mor = request.form["mor"]
-        af = request.form["af"]
-        eve = request.form["eve"]
-        qty = request.form["qty"]
-        day = request.form["day"]
-
-        data={'pid':pid, 'id1':id1, 'name':name, 'mor':mor, 'af':af, 'eve':eve, 'qty':qty, 'day':day}
-        addprescriptiondata(data, id1)
-
-        list=[]
-        keys=['id1', 'pid', 'name', 'mor', 'af', 'eve', 'qty', 'day']
-        result = db.collection("patient").document(id1).collection("details").document('Prescription').get()
-        dict = result.to_dict()
-        for i in keys:
-            list.append(dict[i])
-
-    return render_template("prescription.html", data=list)
-
-@app.route("/delete-prescription", methods=['GET', 'POST'])
-def deleteprescription():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        db.collection('patient').document(id1).collection('details').document('Prescription').delete()
-    return render_template("editprescription.html")
-
-@app.route("/update-prescription", methods=['GET', 'POST'])
-def updateprescriptiondata():
-    if request.method=="POST":
-        pid = request.form["pid"]
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        mor = request.form["mor"]
-        af = request.form["af"]
-        eve = request.form["eve"]
-        qty = request.form["qty"]
-        day = request.form["day"]
-
-        data={'pid':pid, 'id1':id1, 'name':name, 'mor':mor, 'af':af, 'eve':eve, 'qty':qty, 'day':day}
-        addprescriptiondata(data, id1)
-
-    return render_template("editprescription.html")
-
-@app.route("/update-patient", methods=['GET', 'POST'])
-def updatepatientdata():
-    if request.method=="POST":
-        id1 = request.form["id1"]
-        name = request.form["name"]
-        email = request.form["email"]
-        blood = request.form["blood"]
-        weight = request.form["weight"]
-        age = request.form["age"]
-        height = request.form["height"]
-        stage = request.form["stage"]
-        address = request.form["address"]
-        phone = request.form["phone"]
-        history = request.form["history"]
-        gender = request.form["gender"]
-
-        data ={'id':id1, 'name':name,'email':email, 'blood':blood, 'weight':weight,'age':age, 'height':height,'stage':stage,'address':address,'phone':phone, 'history':history,'gender':gender}
-        addpatientdata(data, id1)
-
-    return render_template("editpatient.html")
 
 #api for postgres covitrack
 host = "agada-s1.postgres.database.azure.com"
@@ -257,6 +9,8 @@ user = "agada@agada-s1"
 password = "Password123$"
 sslmode = "require"
 
+#DB functions
+#DB connection
 def getCon():
     conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
     conn = psycopg2.connect(conn_string)
@@ -264,83 +18,258 @@ def getCon():
     cursor = conn.cursor()
     return cursor
 
-def addPatient(email,phone):
-    cursor = getCon()
-    cursor.execute("insert into users values(%s,%s)",(email,phone))
+def getConCurs():
+    conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
+    conn = psycopg2.connect(conn_string)
+    print("Connection established")
+   
+    return conn
+
+#write personal information
+def addPersonalToDB(pid,name,image,dob,age,gender,phone,email,guardian,address):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO personal values({pid},'{name}',{age},'{dob}','{image}','{gender}','{phone}','{email}','{guardian}','{address}')".format(pid=pid,name=name,image=image,dob=dob,age=age,gender=gender,phone=phone,email=email,guardian=guardian,address=address)
+    cursor.execute(query)
+    conn.commit()
+    return "done"
+
+#add covid addHistory
+def addHistoryToDB(pid,name,blood,height,weight,vaccinated,temperature,cstatus,location):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO history values({pid},'{name}','{blood}',{weight},{height},{temperature},'{cstatus}','{vaccinated}','{location}')".format(pid=pid,name=name,blood=blood,weight=weight,height=height,temperature=temperature,cstatus=cstatus,vaccinated=vaccinated,location=location)
+    cursor.execute(query)
     cursor.close()
+    conn.commit()
 
-def addEmergency(email,date):
-    cursor = getCon()
-    cursor.execute("insert into emergency values(%s,%s)",(email,date))
-    cursor.close()
+#add homeq
+def addHomeToDB(pid,name,latitude,longitude):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO homeq values({pid},'{name}','{latitude}','{longitude}')".format(pid=pid,name=name,latitude=latitude,longitude=longitude)
+    cursor.execute(query)
+    conn.commit()
+#add hospital
+def addHospitalToDB(pid,ward,room,bed):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO inpatient values({pid},'{ward}',{room},{bed})".format(pid=pid,ward=ward,room=room,bed=bed)
+    cursor.execute(query)
+    conn.commit()
 
-def addDailyTest(email,score,date):
-    cursor = getCon()
-    cursor.execute("insert into daily values(%s,%s,%s)",(email,score,date))
-    cursor.close()
+#add prescription to db
+def addPrescriptionToDB(pid,pres_id,name,timings,quantity,date):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO prescriptions values({pid},{pres_id},'{name}','{timings}',{quantity},'{date}')".format(pid=pid,name=name,timings=timings,quantity=quantity,date=date,pres_id=pres_id)
+    cursor.execute(query)
+    conn.commit()
 
-def addPrescription(email,morning,afternoon,evening):
-    cursor = getCon()
-    cursor.execute("insert into prescription values(%s,%s,%s,%s)",(email,morning,afternoon,evening))
-    cursor.close()
+#add emergency to db
+def addEmergencyToDB(pid,name,age,area,date,time,status):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO emergencies values({pid},'{name}',{age},'{area}','{date}','{time}','{status}')".format(pid=pid,name=name,age=age,area=area,date=date,time=time,status=status)
+    cursor.execute(query)
+    conn.commit()
 
+#add daily to db
+def addDailyScoreToDB(pid,date,score):
+    conn = getConCurs()
+    cursor =conn.cursor()
+    query="INSERT INTO dailyscore values({pid},'{date}',{score})".format(pid=pid,date=date,score=score)
+    cursor.execute(query)
+    conn.commit()
 
-def checkUserInDB(email,phone):
-    cursor = getCon()
-    cursor.execute("select * from users where email=%s and mobile=%s",(email,phone))
-    data = cursor.fetchall()
-    cursor.close()
-    return True if len(data)>0 else False
+#api routes 
+@app.route('/api/addPersonal',methods=['POST'])
+def addPersonal():
+    pid=request.form['id']
+    name=request.form['name']
+    image=request.form['image']
+    dob=request.form['dob']
+    age=request.form['age']
+    gender=request.form['gender']
+    phone=request.form['phone']
+    email=request.form['email']
+    guardian=request.form['guardian']
+    address=request.form['address']
+    #print(type(pid))
+    addPersonalToDB(int(pid),name,image,dob,int(age),gender,phone,email,guardian,address)
+    return redirect(url_for('addpatient'))
 
-@app.route('/checkUser',methods=['POST'])
-def checkUser():
+@app.route('/api/addHistory',methods=['POST'])
+def addHistory():
+    pid=request.form['id']
+    name=request.form['name']
+    blood=request.form['blood']
+    height=request.form['height']
+    weight=request.form['weight']
+    vaccinated=request.form['vaccine']
+    temperature=request.form['temp']
+    cstatus=request.form['cstatus']
+    location=request.form['location']
+    addHistoryToDB(int(pid),name,blood,int(height),int(weight),vaccinated,int(temperature),cstatus,location)
+    return redirect(url_for('addpatient'))
+
+@app.route('/api/addHome',methods=['POST'])
+def addHome():
+    pid=request.form['id']
+    name=request.form['name']
+    latitude=request.form['latitude']
+    longitude=request.form['longitude']
+    addHomeToDB(int(pid),name,latitude,longitude)
+    return redirect(url_for('addpatient'))
+
+@app.route('/api/addHospital',methods=['POST'])
+def addHospital():
+    pid=request.form['id']
+    ward=request.form['ward']
+    room=request.form['room']
+    bed=request.form['bed']
+    addHospitalToDB(int(pid),ward,int(room),int(bed))
+    return redirect(url_for('addpatient'))
+
+@app.route('/api/addPrescription',methods=['POST'])
+def addPrescription():
+    pid=request.form['pid']
+    pres_id=request.form['id']
+    name=request.form['name']
+    timings=request.form['timings']
+    quantity=request.form['quantity']
+    date=request.form['date']
+    addPrescriptionToDB(int(pid),int(pres_id),name,timings,int(quantity),date)
+    return redirect(url_for('addpatient'))
+
+@app.route('/api/addEmergency',methods=['POST'])
+def addEmergency():
     data=request.get_json()
-    email=data['email']
-    mobile=data['mobile']
-    return jsonify({"status":checkUserInDB(email,mobile)})
+    pid=int(data["pid"])
+    name=data["name"]
+    age=int(data["age"])
+    area=data["area"]
+    date=data["date"]
+    time=data["time"]
+    status=data["status"]
+    addEmergencyToDB(pid,name,age,area,date,time,status)
+    return jsonify({"status":"success"})
 
-
-
-@app.route('/addDailyScore',methods=['POST'])
+@app.route('/api/addDailyScore',methods=['POST'])
 def addDailyScore():
     data=request.get_json()
-    email=data['email']
-    score=data['score']
-    date=data['date']
-    addDailyTest(email,score,date)
+    pid=int(data["pid"])
+    date=data["date"]
+    score=int(data["score"])
+    
+    addDailyScoreToDB(pid,date,score)
     return jsonify({"status":"success"})
 
-@app.route('/addEmergency',methods=['POST'])
-def addEmergencyUser():
-    data=request.get_json()
-    email=data['email']
-    date=data['date']
-    addEmergency(email,date)
-    return jsonify({"status":"success"})
-
-
-@app.route('/getPrescription',methods=['POST'])
-def getPrescription():
-    data=request.get_json()
-    email=data['email']
+#mobile api
+@app.route('/api/IndividualPrescription/<id>',methods=['GET'])
+def getPrescription(id):
+    print(id)
     cursor = getCon()
-    print(email)
-    cursor.execute("select * from prescription where id='"+email+"'")
-    users = cursor.fetchall()
-    result={}
-    patients = []
-   
-    for user in users:
-        patient = {
-            'id': user[0],
-            'morning': user[1],
-            'afternoon': user[2],
-            'evening':user[3],
-        }
-        patients.append(patient)
-    cursor.close()
-    result['pres'] = patients
-    return jsonify(result)
+    query="SELECT * FROM prescriptions where id={id}".format(id=id)
+    cursor.execute(query)
+    data=cursor.fetchall()
+    return jsonify(data)
+
+#testing api calls
+@app.route('/api/allPatients',methods=['GET'])
+def allPatients():
+    cursor = getCon()
+    query="SELECT * FROM personal"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    return jsonify(data)
+
+@app.route('/api/allHistory',methods=['GET'])
+def allHistory():
+    cursor = getCon()
+    query="SELECT * FROM history"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    return jsonify(data)
+
+
+#routes
+@app.route('/')
+
+def home():
+    cursor = getCon()
+    query="SELECT personal.id,personal.name,personal.image,history.status FROM personal INNER JOIN history ON personal.id=history.pid"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    print(data)
+    return render_template('index.html',data=data)
+    
+
+@app.route('/index')
+def index():
+    return redirect(url_for('home'))
+
+@app.route('/medicalhistory')
+def history():
+    cursor = getCon()
+    query="SELECT * FROM history INNER JOIN homeq ON history.pid=homeq.pid"
+    cursor.execute(query)
+    dataHome=cursor.fetchall()
+    print(dataHome)
+    query="SELECT * FROM history INNER JOIN inpatient ON history.pid=inpatient.pid"
+    cursor.execute(query)
+    dataIn=cursor.fetchall()
+    print(dataIn)
+    return render_template('medicalhistory.html',dataHome=dataHome,dataIn=dataIn)
+
+@app.route('/emergency')
+def emergency():
+    cursor = getCon()
+    query="SELECT * FROM emergencies"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    print(data)
+    return render_template('emergency.html',data=data)
+    
+
+@app.route('/location')
+def location():
+    return render_template('location.html')
+
+@app.route('/prescription')
+def prescription():
+    cursor = getCon()
+    query="SELECT * FROM prescriptions"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    print(data)
+    return render_template('prescription.html',data=data)
+    
+
+@app.route('/addpatient')
+def addpatient():
+    return render_template('addpatient.html')
+
+@app.route('/patientinfo/<id>')
+def addpatientid(id):
+    cursor = getCon()
+    query="SELECT personal.id,personal.name,personal.age,personal.gender,personal.image,personal.address,history.status,history.location FROM personal INNER JOIN history ON personal.id = history.pid where personal.id={id}".format(id=id)
+    cursor.execute(query)
+    pdata=cursor.fetchone()
+    query="SELECT * FROM prescriptions where pid={id}".format(id=id)
+    cursor.execute(query)
+    pres=cursor.fetchone()
+    query="SELECT * FROM dailyscore where pid={id}".format(id=id)
+    cursor.execute(query)
+    score=cursor.fetchall()
+    print(pdata)
+    print(pres)
+    print(score)
+    return render_template('patientinfo.html',pdata=pdata,pres=pres,score=score)
+
+@app.route('/patientinfo')
+def patientinfo():
+    return render_template('patientinfo.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

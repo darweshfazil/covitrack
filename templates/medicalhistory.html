@@ -141,19 +141,20 @@
                                       <th class="text-center">Patient Name</th>
                                       <th class="text-center">Covid Status</th>
                                       <th class="text-center">Vaccination Status</th>
-                                      <th class="text-center">Home address</th>
+                                      <th class="text-center">Location</th>
                                       <th class="text-center">Sort</th>
                                       <th class="text-center">Remove</th>
                                     </tr>
                                   </thead>
                                
                                   <tbody>
+                                    {%for h in dataHome%}
                                     <tr>
-                                      <td class="pt-3-half" contenteditable="true">P01</td>
-                                      <td class="pt-3-half" contenteditable="true">Andrews</td>
-                                      <td class="pt-3-half" contenteditable="true">D</td>
-                                      <td class="pt-3-half" contenteditable="true">Yes</td>
-                                      <td class="pt-3-half" contenteditable="true">123,xxxyyyzzz</td>
+                                      <td class="pt-3-half" contenteditable="true">{{h[0]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{h[1]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{h[6]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{h[7]}}</td>
+                                      <td class="pt-3-half" contenteditable="true">{{h[10]}}</td>
                                       <td class="pt-3-half">
                                         <span class="table-up"
                                           ><a href="#!" class="indigo-text"
@@ -172,8 +173,9 @@
                                         >
                                       </td>
                                     </tr>
+                                    {%endfor%}
                                     <!-- This is our clonable table line -->
-                                    <tr>
+                                    <!-- <tr>
                                       <td class="pt-3-half" contenteditable="true">P01</td>
                                       <td class="pt-3-half" contenteditable="true">Andrews</td>
                                       <td class="pt-3-half" contenteditable="true">D</td>
@@ -196,9 +198,9 @@
                                           </button></span
                                         >
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                     <!-- This is our clonable table line -->
-                                    <tr>
+                                    <!-- <tr>
                                       <td class="pt-3-half" contenteditable="true">P01</td>
                                       <td class="pt-3-half" contenteditable="true">Andrews</td>
                                       <td class="pt-3-half" contenteditable="true">D</td>
@@ -221,7 +223,7 @@
                                           </button></span
                                         >
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                     <!-- This is our clonable table line -->
                                     <!-- <tr class="hide">
                                       <td class="pt-3-half" contenteditable="true">Elisa Gallagher</td>
@@ -267,6 +269,7 @@
                         <div id="table" class="table-editable" style="margin-right:30px;margin-left: 30px">
                           <table class="table table-bordered table-responsive-md table-striped text-center">
                             <thead>
+                            {%for p in dataIn%}
                               <tr>
                                 <th class="text-center">Patient ID</th>
                                 <th class="text-center">Patient Name</th>
@@ -281,12 +284,12 @@
                          
                             <tbody>
                               <tr>
-                                <td class="pt-3-half" contenteditable="true">P112</td>
-                                <td class="pt-3-half" contenteditable="true">Tamil</td>
-                                <td class="pt-3-half" contenteditable="true">Detected</td>
-                                <td class="pt-3-half" contenteditable="true">Yes</td>
-                                <td class="pt-3-half" contenteditable="true">002</td>
-                                <td class="pt-3-half" contenteditable="true">08</td>
+                                <td class="pt-3-half" contenteditable="true">P-{{p[0]}}</td>
+                                <td class="pt-3-half" contenteditable="true">{{p[1]}}</td>
+                                <td class="pt-3-half" contenteditable="true">{{p[6]}}</td>
+                                <td class="pt-3-half" contenteditable="true">{{p[7]}}</td>
+                                <td class="pt-3-half" contenteditable="true">{{p[11]}}</td>
+                                <td class="pt-3-half" contenteditable="true">{{p[12]}}</td>
                                 <td class="pt-3-half">
                                   <span class="table-up"
                                     ><a href="#!" class="indigo-text"
@@ -305,8 +308,9 @@
                                   >
                                 </td>
                               </tr>
+                              {%endfor%}
                               <!-- This is our clonable table line -->
-                              <tr>
+                              <!-- <tr>
                                 <td class="pt-3-half" contenteditable="true">P112</td>
                                 <td class="pt-3-half" contenteditable="true">Tamil</td>
                                 <td class="pt-3-half" contenteditable="true">Detected</td>
@@ -330,9 +334,9 @@
                                     </button></span
                                   >
                                 </td>
-                              </tr>
+                              </tr> -->
                               <!-- This is our clonable table line -->
-                              <tr>
+                              <!-- <tr>
                                 <td class="pt-3-half" contenteditable="true">P112</td>
                                 <td class="pt-3-half" contenteditable="true">Tamil</td>
                                 <td class="pt-3-half" contenteditable="true">Detected</td>
@@ -356,7 +360,7 @@
                                     </button></span
                                   >
                                 </td>
-                              </tr>
+                              </tr> -->
                               <!-- This is our clonable table line -->
                               <!-- <tr class="hide">
                                 <td class="pt-3-half" contenteditable="true">P112</td>

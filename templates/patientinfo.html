@@ -86,25 +86,25 @@
             <div class="col-xs-12 col-sm-9">
                 <br>
                 <div class="jumbotron" style="background-color: white;">
-                   <a href="index.html"><img src="\static\back.png"></a>
+                   <a href="/index"><img src="\static\back.png"></a>
                    <br>
                     <h3><b>Patient Information</b></h3>
                     <br>
                     <div class="row ">
                         <div class="col-6 col-sm-6 col-lg-4" >
                            
-                            <img src="https://ibighit.com/bts/images/bts/profile/member-jin.jpg" class="img-fluid" alt="pt" width="250px" height="250px">
+                            <img src="{{pdata[4]}}" class="img-fluid" alt="pt" width="250px" height="250px">
                         </div>
                   
                         <div class="col-6 col-sm-6 col-lg-4" >
                           
                          <ul class="pt_info">
-                             <li>Patient ID         :</li>
-                             <li>Patient Name       :</li>
-                             <li>Patient Age        :</li>
-                             <li>Patient Gender     :</li>
-                             <li>Covid Status            :</li>
-                             <li>Location         :</li>
+                             <li>Patient ID         :{{pdata[0]}}</li>
+                             <li>Patient Name       :{{pdata[1]}}</li>
+                             <li>Patient Age        :{{pdata[2]}}</li>
+                             <li>Patient Gender     :{{pdata[3]}}</li>
+                             <li>Covid Status            :{{pdata[6]}}</li>
+                             <li>Location         :{{pdata[7]}}</li>
                          </ul>
                         </div>
                    
@@ -136,7 +136,11 @@
                                 <div class="row">
                                     <div class="col" style="margin: 30px; padding: 10px;">
                                    <h5 style="line-height: 40px">
-                                    <b>Patients Progress <br>Day 1 :
+                                    <b>Patients Progress 
+                                    {%for prog in score%}
+                                    <br>{{prog[1]}} : {{prog[2]}}
+                                     
+                                     {%endfor%}
                                     </b>
                                     </h5>
                                     
@@ -147,7 +151,7 @@
                                 <div class="row">
                                     <div class="col" style="margin: 30px; padding: 10px;">
                                    <h5 style="line-height: 40px">
-                                    <b>Home Location: Address</b>
+                                    <b>Home Location: {{pdata[5]}}</b>
                                     </h5>
                                     
                                 </div>
@@ -157,11 +161,11 @@
                                 <div class="row">
                                     <div class="col" style="margin: 30px; padding: 10px;">
                                    <h5 style="line-height: 40px">
-                                    <b>Prescription ID:<br>
-                                    Prescription Name:<br>
-                                    Date Prescribed:<br>
-                                    Quantity:<br>
-                                    Schedule:</b>
+                                    <b>Prescription ID:{{pres[1]}}<br>
+                                    Prescription Name:{{pres[2]}}<br>
+                                    Date Prescribed:{{pres[5]}}<br>
+                                    Quantity:{{pres[4]}}<br>
+                                    Schedule:{{pres[3]}}</b>
                                     </h5>
                                     
                                 </div>

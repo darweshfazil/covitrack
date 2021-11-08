@@ -102,7 +102,7 @@
                                     <thead>
                                       <tr>
                                         <th class="text-center">Patient ID</th>
-                                        <th class="text-center">Patient Name</th>
+                                        <!-- <th class="text-center">Patient Name</th> -->
                                         <th class="text-center">Prescription Name</th>
                                         <th class="text-center">Quantity</th>
                                         <th class="text-center">Date</th>
@@ -111,12 +111,13 @@
                                       </tr>
                                     </thead>
                                     <tbody>
+                                      {%for pr in data%}
                                       <tr>
-                                        <td class="pt-3-half" contenteditable="true">P111</td>
-                                        <td class="pt-3-half" contenteditable="true">Aurelia</td>
-                                        <td class="pt-3-half" contenteditable="true">ABC</td>
-                                        <td class="pt-3-half" contenteditable="true">3</td>
-                                        <td class="pt-3-half" contenteditable="true">3/12</td>
+                                        <td class="pt-3-half" contenteditable="true">{{pr[0]}}</td>
+                                        <!-- <td class="pt-3-half" contenteditable="true">Aurelia</td> -->
+                                        <td class="pt-3-half" contenteditable="true">{{pr[2]}}</td>
+                                        <td class="pt-3-half" contenteditable="true">{{pr[4]}}</td>
+                                        <td class="pt-3-half" contenteditable="true">{{pr[5]}}</td>
                                         
                                         <td class="pt-3-half">
                                           <span class="table-up"
@@ -136,8 +137,10 @@
                                           >
                                         </td>
                                       </tr>
+                                      {}
+                                      {%endfor%}
                                       <!-- This is our clonable table line -->
-                                      <tr>
+                                      <!-- <tr>
                                         <td class="pt-3-half" contenteditable="true">P111</td>
                                         <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                         <td class="pt-3-half" contenteditable="true">ABC</td>
@@ -162,7 +165,7 @@
                                         </td>
                                       </tr>
                                       <!-- This is our clonable table line -->
-                                      <tr>
+                                      <!-- <tr>
                                         <td class="pt-3-half" contenteditable="true">P111</td>
                                         <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                         <td class="pt-3-half" contenteditable="true">ABC</td>
@@ -185,9 +188,9 @@
                                             </button></span
                                           >
                                         </td>
-                                      </tr>
+                                      </tr> -->
                                       <!-- This is our clonable table line -->
-                                      <tr class="hide">
+                                      <!-- <tr class="hide">
                                         <td class="pt-3-half" contenteditable="true">P111</td>
                                         <td class="pt-3-half" contenteditable="true">Aurelia</td>
                                         <td class="pt-3-half" contenteditable="true">ABC</td>
@@ -210,7 +213,7 @@
                                             </button></span
                                           >
                                         </td>
-                                      </tr>
+                                      </tr>  -->
                                     </tbody>
                                   </table>
                                 </div>
