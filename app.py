@@ -142,6 +142,22 @@ def addPrescription():
     addPrescriptionToDB(int(pid),int(pres_id),name,timings,int(quantity),date)
     return redirect(url_for('addpatient'))
 
+
+
+#mobile api
+def checkUserInDB(id,email):
+    cursor = getCon()
+    cursor.execute("select id,name,age,address,image,gender from personal where id={id} and email='{email}'".format(id=id,email=email))
+    data = cursor.fetchone()
+    cursor.close()
+    if len(data)==0:
+        return {"status":False}
+    else:
+        print(data)
+
+        return {"status":True,"id":data[0],"name":data[1],"age":data[2],"area":data[3],"image":data[4],"gender":data[5]}
+    
+
 @app.route('/api/addEmergency',methods=['POST'])
 def addEmergency():
     data=request.get_json()
@@ -151,7 +167,7 @@ def addEmergency():
     area=data["area"]
     date=data["date"]
     time=data["time"]
-    status=data["status"]
+    status="pending"
     addEmergencyToDB(pid,name,age,area,date,time,status)
     return jsonify({"status":"success"})
 
@@ -165,7 +181,13 @@ def addDailyScore():
     addDailyScoreToDB(pid,date,score)
     return jsonify({"status":"success"})
 
-#mobile api
+@app.route('/api/checkUser',methods=['POST'])
+def checkUser():
+    data=request.get_json()
+    id=int(data['id'])
+    email=data['email']
+    return jsonify(checkUserInDB(id,email))
+
 @app.route('/api/IndividualPrescription/<id>',methods=['GET'])
 def getPrescription(id):
     print(id)
@@ -173,7 +195,20 @@ def getPrescription(id):
     query="SELECT * FROM prescriptions where id={id}".format(id=id)
     cursor.execute(query)
     data=cursor.fetchall()
-    return jsonify(data)
+    res={}
+    lis=[]
+    for i in data:
+        obj={}
+        obj['id']=i[0]
+        obj['pid']=i[1]
+        obj['name']=i[2]
+        obj['timing']=i[3]
+        obj['quantity']=i[4]
+        obj['date']=i[5]
+        lis.append(obj)
+    
+    
+    return jsonify({"prescription":lis})
 
 #testing api calls
 @app.route('/api/allPatients',methods=['GET'])
